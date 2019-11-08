@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 `;
 const StyledButton = styled.button`
   width: ${props => {
-    console.log("style", props);
+    // console.log("style", props);
     return props.buttonStyle ? props.buttonStyle.width : "100px";
   }};
   margin-left: 5px;
@@ -32,6 +32,10 @@ const InputField = props => {
     console.log("E", e.target.value);
     setInputValue(e.target.value);
   };
+  const onClickHandler = () => {
+    props.onClick(inputValue);
+    setInputValue("");
+  };
   return (
     <StyledContainer>
       <StyledInput
@@ -40,7 +44,13 @@ const InputField = props => {
         onChange={inputHandler}
         style={props.inputStyle}
       />
-      <StyledButton type="button" style={props.buttonStyle}>{props.buttonText}</StyledButton>
+      <StyledButton
+        type="button"
+        style={props.buttonStyle}
+        onClick={() => onClickHandler()}
+      >
+        {props.buttonText}
+      </StyledButton>
     </StyledContainer>
   );
 };

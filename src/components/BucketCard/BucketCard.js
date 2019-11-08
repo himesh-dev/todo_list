@@ -35,14 +35,21 @@ const StyledAddItem = styled.p`
   line-height: 0px;
   font-size: 12px;
 `;
-const BucketCard = () => {
+const BucketCard = props => {
+  console.log("Card", props);
   return (
     <StyledCard>
       <StyledHeading>
-        <StyledP>todolist</StyledP>
+        <StyledP>{props.todo.bucket}</StyledP>
       </StyledHeading>
-      <StyledAddItem>No items</StyledAddItem>
-      <StyledButton type="button">Add Item</StyledButton>
+      <StyledAddItem>
+        {props.todo.list.length > 0
+          ? props.todo.list.length + " items"
+          : "No Items"}
+      </StyledAddItem>
+      <StyledButton type="button" onClick={props.selectBucketHandler}>
+        Add Item
+      </StyledButton>
     </StyledCard>
   );
 };
