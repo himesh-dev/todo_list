@@ -31,36 +31,40 @@ const TaskView = props => {
   const updateListItem = (id, val) => {
     let updateditem = {
       id,
-      text: val
+      ...val
     };
     props.updateListItem(updateditem);
   };
+
   return (
     <StyledContainer>
       {/* <p>Select you Bucket...</p> */}
-      <InputField
-        inputStyle={{ width: "80vh" }}
-        buttonStyle={{ width: "11vh" }}
-        buttonText="Add Item"
-        onClick={text => addListItem(text)}
-      />
       {props.todos.currentId || props.todos.currentId == 0 ? (
         <div style={{ marginTop: "20px" }}>
+          <InputField
+            inputStyle={{ width: "80vh" }}
+            buttonStyle={{ width: "11vh" }}
+            buttonText="Add Item"
+            onClick={text => addListItem(text)}
+          />
           {props.todos.todos[props.todos.currentId].list.length ? (
             props.todos.todos[props.todos.currentId].list.map((item, i) => (
               <ListItem
                 key={i}
                 item={item}
                 index={i}
-                updateListItem={val => updateListItem(i, val)}
+                updateListItem={val => updateListItem(i, { text: val })}
                 deleteListItem={() => props.deleteListItem(i)}
+                updateListItemStatus={val => updateListItem(i, { status: val })}
               />
             ))
           ) : (
-            <p>No data</p>
+            <p>ADD ITEMS...</p>
           )}
         </div>
-      ) : null}
+      ) : (
+        <h3>YOUR TASKS WILL BE HERE...</h3>
+      )}
       {/* <ListItem /> */}
     </StyledContainer>
   );

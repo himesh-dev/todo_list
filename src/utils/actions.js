@@ -31,3 +31,9 @@ export const deleteListItem = payload => {
     payload
   };
 };
+export const updateListItemStatus = payload => {
+  return {
+    type: actionTypes.UPDATE_LIST_ITEM_STATUS,
+    payload
+  };
+};

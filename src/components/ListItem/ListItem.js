@@ -3,16 +3,21 @@ import styled from "styled-components";
 import edit from "../../assets/edit.svg";
 import del from "../../assets/delete.svg";
 import close from "../../assets/close.svg";
+import { updateListItemStatus } from "../../utils/actions";
 
 const StyledList = styled.div`
   width: 100vh;
   margin-bottom: 10px;
+  margin-top: 20px;
   /* border-bottom: 1px solid black; */
   display: flex;
   padding: 5px 10px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #f5f5f5;
+  background-color: ${props => {
+    // console.log("style", props);
+    return props.checked ? "#a8ffc1" : "#f5f5f5";
+  }};
   border-radius: 4px;
   flex-direction: row;
   align-items: center;
@@ -63,8 +68,11 @@ const ListItem = props => {
       setEditing(false);
     }
   };
+  const updateListItemStatus = () => {
+    props.updateListItemStatus(props.item.status == "done" ? "todo" : "done");
+  };
   return (
-    <StyledList>
+    <StyledList checked={props.item.status == "done" ? true : false}>
       {editing ? (
         <StyledInputBox>
           <StyledInput
@@ -85,6 +93,7 @@ const ListItem = props => {
             type="checkbox"
             style={{ flex: 1 }}
             checked={props.item.status == "done" ? true : false}
+            onChange={() => updateListItemStatus()}
           />
           <StyledText>{props.item.text}</StyledText>
           <div

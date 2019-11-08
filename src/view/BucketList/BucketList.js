@@ -33,7 +33,7 @@ const BucketList = props => {
               selectBucketHandler={() => selectBucketHandler(i)}
             />
           ))
-        : null}
+        : <h3>ADD BUCKET</h3>}
     </StyledContainer>
   );
 };
